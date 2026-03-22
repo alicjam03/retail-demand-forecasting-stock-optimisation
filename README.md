@@ -1,75 +1,82 @@
 # Retail Demand Forecasting and Stock Optimisation
 
-## Project Overview
-This project explores how data science can be used to support retail decision-making through demand forecasting and stock optimisation.
-
-Using a synthetic retail dataset containing pricing, discount, promotion, inventory, and competitor pricing information, I carried out exploratory data analysis, improved the realism of the dataset, built predictive models, and translated the outputs into business recommendations for stock management.
+## Overview
+This project explores retail demand forecasting and stock optimisation using a synthetic retail dataset. The goal was to predict units sold, understand the main drivers of demand, and identify understock and overstock situations to support better inventory decisions.
 
 ## Objectives
-- Identify key drivers of product demand
-- Build predictive models to forecast units sold
-- Compare model performance across different machine learning approaches
-- Use predicted demand to identify understock and overstock scenarios
-- Generate business-focused recommendations for inventory optimisation
+- Analyse retail sales and inventory data
+- Identify key drivers of demand
+- Build and compare predictive models for units sold
+- Use predicted demand to support stock optimisation
+- Translate model outputs into business recommendations
 
 ## Dataset
-The original dataset contained retail variables such as:
+The project began with a synthetic retail inventory dataset containing variables such as:
 - Units Sold
 - Inventory Level
-- Units Ordered
 - Price
 - Discount
 - Holiday/Promotion
 - Competitor Pricing
 - Seasonality
-- Weather Condition
 
-Initial exploratory analysis showed that some key variables did not meaningfully influence demand, which limited the realism of the data. To improve the usefulness of the dataset for modelling, I introduced more realistic relationships between demand and key retail drivers such as price, discount, and promotions.
+During exploratory analysis, I found that some key business variables showed little or no realistic relationship with demand. To improve the usefulness of the dataset for modelling, I introduced more realistic demand behaviour such as:
+- negative price elasticity
+- positive discount effects
+- promotional uplift
+- inventory constraints
 
-## Exploratory Data Analysis
-Key findings from the initial analysis included:
-- Demand Forecast was perfectly correlated with Units Sold, indicating data leakage
-- Price, Discount, and Holiday/Promotion initially had almost no relationship with sales
-- Competitor Pricing was highly correlated with Price
-- The dataset required refinement before meaningful modelling could take place
+## Workflow
+1. Exploratory Data Analysis  
+   - correlation analysis
+   - scatter plots
+   - grouped comparisons
+   - identification of unrealistic relationships and data leakage risks
 
-After improving the data, the analysis showed:
-- A clear negative relationship between price and units sold
-- Positive effects of discount and promotions on demand
-- Stronger and more interpretable feature relationships overall
+2. Data Improvement  
+   - adjusted synthetic demand relationships to reflect more realistic retail behaviour
+   - created a revised target with interpretable business drivers
 
-## Modelling
-I trained and compared multiple models:
-- Linear Regression
-- Random Forest Regressor
+3. Modelling  
+   - Linear Regression
+   - Random Forest Regressor
+   - XGBoost
+   - model comparison using RMSE and cross-validation
+
+4. Stock Optimisation  
+   - compared predicted demand with inventory level
+   - classified stock as understock, overstock, or optimal
+   - generated business recommendations
+
+## Key Results
+- Linear Regression achieved the best performance with RMSE of approximately 10 units
+- Price showed a strong negative relationship with demand
+- Discount and promotions had positive effects on units sold
+- Stock analysis showed:
+  - Overstock: 39,532
+  - Understock: 27,030
+  - Optimal: 6,538
+
+These results suggest substantial inefficiencies in inventory allocation, with overstocking representing the largest issue.
+
+## Business Insight
+The project shows how predictive modelling can support retail decision-making by improving stock allocation. The findings suggest that demand-driven inventory planning could reduce excess stock, lower holding costs, and reduce missed sales opportunities.
+
+## Tools and Technologies
+- Python
+- pandas
+- NumPy
+- scikit-learn
+- matplotlib
+- seaborn
 - XGBoost
+- Jupyter Notebook
 
-### Best Model
-Linear Regression achieved the best cross-validated performance for this dataset.
 
-- Cross-validated RMSE: approximately 10.01 units
+## Future Improvements
+- Add product-level seasonal effects
+- Build an interactive Power BI or Tableau dashboard
+- Incorporate returns and category-level demand behaviour
+- Extend optimisation logic to recommend reorder quantities
 
-This result was expected because the improved dataset contained strong linear relationships between key variables and demand.
 
-## Feature Importance
-Feature importance analysis showed:
-- Linear Regression: Inventory Level, Discount, Holiday/Promotion
-- Random Forest: Inventory Level, Price, Discount
-- XGBoost: Price, Discount, Inventory Level
-
-This comparison highlighted how different models interpret the same data:
-- Linear models focused on direct relationships
-- Tree-based models captured more distributed, non-linear interactions
-
-## Stock Optimisation
-Predicted demand was compared with current inventory levels to classify stock into:
-- Overstock
-- Understock
-- Optimal
-
-### Results
-- Overstock: 39,532
-- Understock: 27,030
-- Optimal: 6,538
-
-This means that only a small proportion of stock was at optimal levels, while the majority was either over
